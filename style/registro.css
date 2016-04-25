@@ -1,0 +1,96 @@
+@charset "utf-8"
+/* CSS Document*/
+body{
+
+
+}
+
+#banner
+{
+        width: 100%;
+		height: auto;
+		min-height: 500px
+}
+
+
+
+#contenedorFormulario{
+	height: auto;
+	min-height: 300px; 
+	max-height: auto; 
+	background-color: none;
+	font-size: 17px;
+}
+
+	#formulario1{
+		width: 45%;  
+		float: left; 
+		background-color: none; 
+		margin-top:1em;
+	}
+
+			#divFormulario{
+				background-color: none; 
+				width: 195px;
+				float: right;
+			}
+
+			#divFormulario2{
+				background-color: none; 
+				width: 200px;
+				margin:0 auto;
+			}
+
+
+	#formulario2{
+		width: 35%;
+		float: left; 
+		background-color: none; 
+		margin-top:1em;
+	}
+
+#contenedorFormularioEmpresas{
+	min-height: 300px; 
+	max-height: auto; 
+	background-color: none;
+}
+
+
+#footerRegistro{
+	width: 100%;
+	height:50px;
+
+	background-color: black;
+	float: left;
+}
+
+@media (max-width:800px){
+
+#contenedorFormulario{
+	min-height: 500px; 
+}
+
+	#formulario1{
+		width: 100%;  
+		float: none; 
+	}
+
+			#divFormulario{
+				float: none;
+				margin: 0 auto;
+			}
+
+			#divFormulario2{
+				margin: 0 auto;
+			}
+
+	#formulario2{
+		width: 100%;
+		float: none; 
+	}
+
+#contenedorFormularioEmpresas{
+	min-height: 480px; 
+}
+
+}
