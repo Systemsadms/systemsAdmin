@@ -81,98 +81,22 @@
 
 <!----------------------------------------------JS HEADER---------------------------------->
 <div id="contenidoDelBody">
-    <nav id="navMenuOtro" class="hidden"> 
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Registrate</a></li>
-        <li><a href="#">Portafolio</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Planes de Pago</a></li>
-        <li><a href="#">Aplicaciones</a></li>
-        <li><a href="#">FAQS</a></li>
-        <li><a href="#">Tutoriales</a></li>
-        <li><a href="#">Nosotros</a></li>
-        <li><a href="#">Contactenos</a></li>
-      </ul>
-    </nav>
+<?php
+require ("menuPrincipal.php");
+?>
 
+<?php
+require ("areaClientes.php");
+?>
 
-
-
-
-
-
-    <div id="loginmodalMenuOtro" class="hidden">
-
-    <?php   
-      if (isset($_SESSION["login"]))
-    {
-      $micuenta=$_SESSION["login"]; 
-      ?>          
-            <div id="iramiCuenta"><a href="#">Ir a mi cuenta</a><br><br><a href="../destruir.php">Cerrar Session</a></div>
-          <div id="social">
-               <a href=""><img src="iconos/twit.png" width="50" height="43" /></a>
-               <a href=""><img src="iconos/face.png" width="50" height="43" /></a>
-               <a href=""><img src="iconos/google.png" width="50" height="43" /></a>
-          </div>    
-    <?php
-          }
-      else
-          {  
-        ?>
-          <form method="post" action="#" >
-           <br>
-                    <div id="tipo">
-                          <input type="radio" name="logindeusuario" value="1" checked />
-                          <label>Cliente</label>
-                          <input type="radio" name="logindeusuario" value="2"/>    
-                          <label>Administrador</label>
-                      </div>                
-                    <br>
-                          
-                    <div id="camposlogin">
-                          <label>Usuario</label><br> 
-                          <input class="inputareadeClientes" type="text" class="textbox" name="nick"/> 
-                          <br>              
-                          <label>Password</label><br> 
-                          <input class="inputareadeClientes" type="password" class="textbox" name="pass"/>
-                          <br><br>
-                          <input type="submit" class="textbox" name="entrar" size="35" value="Iniciar Session"/>  
-                      </div>
-         </form>         
-           
-           <div id="registro">
-               <em><a href="registro.php">Registrate</a>         
-               <em><a style="cursor:pointer;"><p onClick="recuperar()">Recuperar Contraseña</p></a></em>
-           </div>
-
-           <div id="social">
-               <a href=""><img src="iconos/twit.png" width="45" height="43" /></a>
-               <a href=""><img src="iconos/face.png" width="45" height="43" /></a>
-               <a href=""><img src="iconos/google.png" width="45" height="43" /></a>
-           </div>  
-      <?php
-    }
-    ?>
-  </div>
 </div>
 <!----------------------------------------------FIN JS HEADER---------------------------------->
 
 
-<div id="menuMiCuenta" class="show2">
-  <div id="logoDeSA"></div>
-  <a href="index.php"><div id="misProyectos">Mis Proyectos</div></a>
-  <a href="solicitarServicio.php"><div id="solicitudDeServicios">Solicitud de Servicios</div></a>
-  <a href="pagosFacturas.php"><div id="pagosYFacturas">Pagos y Facturas</div></a>
-  <a href="index.php"><div id="ticketsDeServicios">Tickets de Servicios (0)</div></a>
-  <div id="guiasYTutoriales">Guias y Tutoriales</div>
-</div>
+<?php
+require ("menuOpciones.php");
+?>
 
-<a href="#" onclick="menuOpciones()">
-<div id="menuOpciones" class="hidden2">
-<strong><em>OPCIONES</em></strong>  
-</div>
-</a>
 
 
 
@@ -202,68 +126,75 @@ $nick = $_SESSION["login"];
           $hacerconsulta=mysql_query ($consulta,$conexion); 
               
 
-
-
-
-
-$consulta = "SELECT * FROM tickets WHERE estatus='Abierto' AND cliente='$idCliente';";
-
-        $hacerconsulta=mysql_query ($consulta,$conexion);       
-        echo "<table width='95%' border='0' align='center' style='font-family:Verdana, Geneva, sans-serif; font-size:90%; color:#000'>";
-        echo "<tr>";
-        echo "<td align='center' class='letratitulo'><b>Ticket Nº</b></td>";
-        echo "<td align='center' class='letratitulo'><b>Fecha</b></td>";
-        echo "<td align='center' class='letratitulo'><b>Hora</b></td>";
-        echo "<td align='center' class='letratitulo'><b>Area</b></td>";
-        echo "<td align='center' class='letratitulo'><b>Asunto</b></td>";
-        echo "<td align='center' class='letratitulo'><b>Estatus</b></td>";
-        echo "<td align='center' class='letratitulo'><b>Nuevos</b></td>";
-        echo "<td align='center' class='letratitulo'><b></b></td>";
-        echo "</tr>";
-        $reg = mysql_fetch_array($hacerconsulta,MYSQL_BOTH);        
-        while ($reg)
-        {
-        echo "<tr>";
-        echo "<td align='center' bgcolor='#CCCCCC'>".$reg[0]."</td>";
-        echo "<td align='center' bgcolor='#CCCCCC'>".$reg[3]."</td>";
-        echo "<td align='center' bgcolor='#CCCCCC'>".$reg[2]."</td>";
-        echo "<td align='center' bgcolor='#CCCCCC'>".$reg[4]."</td>";
-        echo "<td align='center' bgcolor='#CCCCCC'>".$reg[5]."</td>";           
-
-        
-            if ($reg[7]="Abierto")
+          $ssql = "SELECT * FROM tickets WHERE estatus='Abierto' AND cliente='$idCliente'";
+          $rs = mysql_query($ssql,$conexion);     
+          if (mysql_num_rows($rs)>0)
           {
-            echo "<td align='center' bgcolor='#CCCCCC'><font color='#f60'>".$reg[7]."</font></td>";
+
+                  $consulta = "SELECT * FROM tickets WHERE estatus='Abierto' AND cliente='$idCliente';";
+
+                  $hacerconsulta=mysql_query ($consulta,$conexion);       
+                  echo "<table width='95%' border='0' align='center' style='font-family:Verdana, Geneva, sans-serif; font-size:90%; color:#000'>";
+                  echo "<tr>";
+                  echo "<td align='center' class='letratitulo'><b>Ticket Nº</b></td>";
+                  echo "<td align='center' class='letratitulo'><b>Fecha</b></td>";
+                  echo "<td align='center' class='letratitulo'><b>Hora</b></td>";
+                  echo "<td align='center' class='letratitulo'><b>Area</b></td>";
+                  echo "<td align='center' class='letratitulo'><b>Asunto</b></td>";
+                  echo "<td align='center' class='letratitulo'><b>Estatus</b></td>";
+                  echo "<td align='center' class='letratitulo'><b>Nuevos</b></td>";
+                  echo "<td align='center' class='letratitulo'><b></b></td>";
+                  echo "</tr>";
+                  $reg = mysql_fetch_array($hacerconsulta,MYSQL_BOTH);        
+                  while ($reg)
+                  {
+                  echo "<tr>";
+                  echo "<td align='center' bgcolor='#CCCCCC'>".$reg[0]."</td>";
+                  echo "<td align='center' bgcolor='#CCCCCC'>".$reg[3]."</td>";
+                  echo "<td align='center' bgcolor='#CCCCCC'>".$reg[2]."</td>";
+                  echo "<td align='center' bgcolor='#CCCCCC'>".$reg[4]."</td>";
+                  echo "<td align='center' bgcolor='#CCCCCC'>".$reg[5]."</td>";           
+
+                  
+                      if ($reg[7]="Abierto")
+                    {
+                      echo "<td align='center' bgcolor='#CCCCCC'><font color='#f60'>".$reg[7]."</font></td>";
+                    }
+                    else
+                    {
+                      echo "<td align='center' bgcolor='#CCCCCC'><font color='green'>".$reg[7]."</font></td>";
+                    }
+                    
+                    
+                    
+                    if ($reg[8]>0)
+                    {
+                      echo "<td align='center' bgcolor='#CCCCCC'><font color='red'>".$reg[8]."</font></td>";
+                    }
+                    else
+                    {
+                      echo "<td align='center' bgcolor='#CCCCCC'><font color='green'>".$reg[8]."</font></td>";
+                    }
+                    
+                  echo "<td align='center' bgcolor='#CCCCCC'>       
+                  <form action='#modal' method='post'>
+                    <input type='hidden' name='cliente' value=".$reg[1].">
+                    <input type='hidden' name='ticket' value=".$reg[0].">
+                    <input type='submit' name='ver' value=' Ver Seguimiento'>
+                  </form>
+                  
+                  </td>";
+                  $reg = mysql_fetch_array($hacerconsulta,MYSQL_BOTH);
+                  echo "</tr>";
+                  }
+                  echo "</table>";
+                  mysql_close($conexion);
           }
-          else
+                  else
           {
-            echo "<td align='center' bgcolor='#CCCCCC'><font color='green'>".$reg[7]."</font></td>";
+          echo "<br><br>";
+          echo "<div style='text-align:center;'>No hay Tickets de Servicio pendientes</div>";
           }
-          
-          
-          
-          if ($reg[8]>0)
-          {
-            echo "<td align='center' bgcolor='#CCCCCC'><font color='red'>".$reg[8]."</font></td>";
-          }
-          else
-          {
-            echo "<td align='center' bgcolor='#CCCCCC'><font color='green'>".$reg[8]."</font></td>";
-          }
-          
-        echo "<td align='center' bgcolor='#CCCCCC'>       
-        <form action='#modal' method='post'>
-          <input type='hidden' name='cliente' value=".$reg[1].">
-          <input type='hidden' name='ticket' value=".$reg[0].">
-          <input type='submit' name='ver' value=' Ver Seguimiento'>
-        </form>
-        
-        </td>";
-        $reg = mysql_fetch_array($hacerconsulta,MYSQL_BOTH);
-        echo "</tr>";
-        }
-        echo "</table>";
-        mysql_close($conexion);
 
       
 ?>

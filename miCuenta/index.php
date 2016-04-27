@@ -51,100 +51,27 @@
 
 <!----------------------------------------------JS HEADER---------------------------------->
 <div id="contenidoDelBody">
-    <nav id="navMenuOtro" class="hidden"> 
-      <ul>
-        <li><a href="../index.php">Home</a></li>
-        <li><a href="../regisro.php">Registrate</a></li>
-        <li><a href="#">Portafolio</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Planes de Pago</a></li>
-        <li><a href="#">Aplicaciones</a></li>
-        <li><a href="#">FAQS</a></li>
-        <li><a href="#">Tutoriales</a></li>
-        <li><a href="#">Nosotros</a></li>
-        <li><a href="#">Contactenos</a></li>
-      </ul>
-    </nav>
+
+
+<?php
+require ("menuPrincipal.php");
+?>
+
+
+<?php
+require ("areaClientes.php");
+?>
 
 
 
-
-
-
-
-    <div id="loginmodalMenuOtro" class="hidden">
-
-    <?php   
-      if (isset($_SESSION["login"]))
-    {
-      $micuenta=$_SESSION["login"]; 
-      ?>          
-            <div id="iramiCuenta"><a href="#">Ir a mi cuenta</a><br><br><a href="../destruir.php">Cerrar Session</a></div>
-          <div id="social">
-               <a href=""><img src="iconos/twit.png" width="50" height="43" /></a>
-               <a href=""><img src="iconos/face.png" width="50" height="43" /></a>
-               <a href=""><img src="iconos/google.png" width="50" height="43" /></a>
-          </div>    
-    <?php
-          }
-      else
-          {  
-        ?>
-          <form method="post" action="#" >
-           <br>
-                    <div id="tipo">
-                          <input type="radio" name="logindeusuario" value="1" checked />
-                          <label>Cliente</label>
-                          <input type="radio" name="logindeusuario" value="2"/>    
-                          <label>Administrador</label>
-                      </div>                
-                    <br>
-                          
-                    <div id="camposlogin">
-                          <label>Usuario</label><br> 
-                          <input class="inputareadeClientes" type="text" class="textbox" name="nick"/> 
-                          <br>              
-                          <label>Password</label><br> 
-                          <input class="inputareadeClientes" type="password" class="textbox" name="pass"/>
-                          <br><br>
-                          <input type="submit" class="textbox" name="entrar" size="35" value="Iniciar Session"/>  
-                      </div>
-         </form>         
-           
-           <div id="registro">
-               <em><a href="registro.php">Registrate</a>         
-               <em><a style="cursor:pointer;"><p onClick="recuperar()">Recuperar Contraseña</p></a></em>
-           </div>
-
-           <div id="social">
-               <a href=""><img src="iconos/twit.png" width="45" height="43" /></a>
-               <a href=""><img src="iconos/face.png" width="45" height="43" /></a>
-               <a href=""><img src="iconos/google.png" width="45" height="43" /></a>
-           </div>  
-      <?php
-    }
-    ?>
-  </div>
 </div>
 <!----------------------------------------------FIN JS HEADER---------------------------------->
 
 
 
-<div id="menuMiCuenta" class="show2">
-  <div id="logoDeSA"></div>
-  <a href="index.php"><div id="misProyectos">Mis Proyectos</div></a>
-  <a href="solicitarServicio.php"><div id="solicitudDeServicios">Solicitud de Servicios</div></a>
-  <a href="pagosFacturas.php"><div id="pagosYFacturas">Pagos y Facturas</div></a>
-  <a href="index.php"><div id="ticketsDeServicios">Tickets de Servicios (0)</div></a>
-  <div id="guiasYTutoriales">Guias y Tutoriales</div>
-</div>
-
-<a href="#" onclick="menuOpciones()">
-<div id="menuOpciones" class="hidden2">
-<strong><em>OPCIONES</em></strong>  
-</div>
-</a>
-
+<?php
+require ("menuOpciones.php");
+?>
 
 
 
@@ -215,7 +142,7 @@
         </div>
       </div>
       <div id="contenidoDeDominios">
-          <table border="0" width="260">
+          
 <?php       
           require ("../cnx.php");
           $nick = $_SESSION["login"];
